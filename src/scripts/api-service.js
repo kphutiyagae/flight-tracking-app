@@ -9,24 +9,14 @@ const config = {
 
 const baseUrl = "http://opensky-network.org/api";
 
-/*
-async function getAllStates() {
-  fetch(`${baseUrl}/states/all`)
-  .then((response) => response.json())
-  .then((data) => console.log(data))
+
+async function getAllStates(){
+  return await fetch(`${baseUrl}/states/all?extended=1`)
+              .then( (res) => res.json())
+              .then( (data) => {
+                return data.states;
+              })
 }
 
-async function getAircraft(flight_id) {
-  fetch(`${baseUrl}/states/all`)
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-}
 
-async function getFlightsInRange(begin,end) {
-  fetch(`${baseUrl}/states/all`)
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-}
-
-export {testFunct, getAllStates}
-*/
+export {getAllStates}

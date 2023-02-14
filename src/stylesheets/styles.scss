@@ -22,6 +22,11 @@ html {
         background-color: rebeccapurple;
         grid-row: 2/ 6;
         grid-column: 1/ 7;
+        min-width: 400px;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        
     }
 
     .container__nav-bar {
@@ -34,8 +39,52 @@ html {
         align-items: center;
     }
 
+    #container__list-component {
+        background-color: cornflowerblue;
+        grid-row: 7/7;
+        grid-column: 1 / 7;
+    }
+
     .container__nav-bar h2 {
         color: white;
+    }
+
+    .list-component__item{
+        background-color:indianred;
+        min-width: max-content;
+        min-height: max-content;
+        padding-top: 1.2em;
+        padding-bottom: 0.8em;
+        margin: 0.3em;
+        border-radius: 8px;
+        color: white;
+        border-bottom: rgb(150, 150, 150) solid 0.2px;
+
+        h3 {
+            margin-left: 1.3em;
+            margin-bottom: 1.2em;
+        }
+
+        p {
+            margin-left: 1.5em;
+            color: rgb(211, 211, 211);
+        }
+
+        .list-item__bottom-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .list-component__expand-info{
+                margin-right: 1.1em;
+                background-color: rgb(210, 210, 210);
+                padding: 0.5em;
+                border-radius: 15px;
+                color: black;
+            }
+
+        }
+
     }
 
 

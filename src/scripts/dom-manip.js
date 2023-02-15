@@ -42,9 +42,9 @@ function createListItem(stateVector){
 
         node.classList ='list-component__item';
 
-        node.innerHTML = `<h3>Callsign: ${stateVector[1] ?? 'Unavailable'}</h3>\n
-        <p> Origin Country: ${stateVector[2]} </p>\n
-        <p> Aircraft Category: ${ flightClass.get(parseInt(stateVector[17]))} </p>\n
+        node.innerHTML = `<h3> ${stateVector[1] ?? 'Unavailable'}</h3>\n
+        <p> ${stateVector[2]} </p>\n
+        <p> ${ flightClass.get(parseInt(stateVector[17]))} </p>\n
         </div>`;
 
         return node;
@@ -57,9 +57,11 @@ function populateListComponent(statesVector, startIndex, endIndex){
     const flightsArray = statesVector.slice(startIndex, endIndex);
 
     flightsArray.map( (flight) => {
+        if( flight[6] & flight[5]){}
         list_component.appendChild( createListItem(flight) );
     });
 }
 
+function onItemClick(){}
 
 export {createListItem, populateListComponent, getClass}

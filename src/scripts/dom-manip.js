@@ -1,5 +1,6 @@
+import { moveToFlight } from "./map-service";
 
-let flightClass = new Map();
+const flightClass = new Map();
 flightClass.set(0, "N/A");
 flightClass.set(1, "No ADS-B Info");
 flightClass.set(2, "Light");
@@ -22,46 +23,58 @@ flightClass.set(18, "Point Obstacle");
 flightClass.set(19, "Cluster Obstacle");
 flightClass.set(20, "Line Obstacle");
 
-function getClass(i){
-    return flightClass.get(i);
+//Check out enums.
+
+function getClass(i) {
+	return flightClass.get(i);
 }
+//Array length is it realy 17?
+//Trust nothing.
+function createListItem(stateVector) {
+	if (stateVector !== null) {
+		const list_component = document.getElementById("container__list-component");
+		const node = document.createElement("div");
+		node.dataset.id = `${stateVector[0]}`;
 
-function createListItem(stateVector){
+		node.dataset.lat = `${stateVector[6]}`;
 
-    if(stateVector !== null){
-    
-        const list_component = document.getElementById("container__list-component");
- 
-        const node = document.createElement("div");
-        
-        node.dataset.id = `${stateVector[0]}`;
+		node.dataset.long = `${stateVector[5]}`;
 
-        node.dataset.lat = `${stateVector[6]}`;
+		node.classList = "list-component__item";
 
-        node.dataset.long = `${stateVector[5]}`;
+		node.onclick = (event) => onFlightClick(event);
 
-        node.classList ='list-component__item';
-
-        node.innerHTML = `<h3> ${stateVector[1] ?? 'Unavailable'}</h3>\n
+		node.innerHTML = `<h3> ${stateVector[1] ?? "Unavailable"}</h3>\n
         <p> ${stateVector[2]} </p>\n
-        <p> ${ flightClass.get(parseInt(stateVector[17]))} </p>\n
+        <p> ${flightClass.get(parseInt(stateVector[17]))} </p>\n
         </div>`;
 
-        return node;
-    }
+		return node;
+	}
 }
 
-function populateListComponent(statesVector, startIndex, endIndex){
-    const list_component = document.getElementById("container__list-component");
-    
-    const flightsArray = statesVector.slice(startIndex, endIndex);
-
-    flightsArray.map( (flight) => {
-        if( flight[6] & flight[5]){}
-        list_component.appendChild( createListItem(flight) );
-    });
+function onFlightClick(event) {
+	if (
+		event.target.dataset &&
+		event.target.dataset.lat &&
+		event.target.dataset.long
+	) {
+		moveToFlight(event.target.dataset.lat, event.target.dataset.long);
+	}
 }
 
-function onItemClick(){}
+//Naming conv. - be verbose
+function populateListComponent(statesVector, startIndex, endIndex) {
+	const list_component = document.getElementById("container__list-component");
 
-export {createListItem, populateListComponent, getClass}
+	const flightsArray = statesVector.slice(startIndex, endIndex);
+
+	flightsArray.map((flight) => {
+		if (flight[6] & flight[5]) {
+		}
+		list_component.appendChild(createListItem(flight));
+	});
+}
+//Poor practice to remove component and not eventListner.
+
+export { createListItem, populateListComponent, getClass };

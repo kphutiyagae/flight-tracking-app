@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flight Tracker App</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="container__nav-bar">
-        <h2> Flight Tracker</h2>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flight Tracker App</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="container__filter-options">
+      <div class="filter-options__buttons">
+        <button class="filter-options__close-button">Close</button>
+        <button class="filter-options__apply-button">Apply</button>
       </div>
-      <div id="map" class="container__map-component">
-      </div>
-      <div id="container__list-component">
-      </div>
-      <div class="container__list-options">
-      </div>  
     </div>
-    <script type="module" src="/main.js"></script>
-  </body>
+    <div class="container__nav-bar">
+      <h2>Flight Tracker</h2>
+    </div>
+    <div id="map" class="container__map-component">
+    </div>
+    <div id="container__list-component">
+    </div>
+    <div class="container__list-options">
+      <button class="list-options__filter-button">Filter</button>
+      <button class="list-options__clear-button">Clear</button>
+    </div>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>
-
-<!--
-      <div class="container">
-      <div class="container__nav-bar">
-        <h2> Flight Tracker</h2>
-      </div>
-      <div id="map" class="container__map-component">
-
-      </div>  
-    </div>
--->

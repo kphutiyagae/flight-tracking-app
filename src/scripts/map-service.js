@@ -1,12 +1,13 @@
 import L from "leaflet";
 
+const map = L.map("map").setView([51.505, -0.09], 13, {
+	dragging: false,
+	"attribution-control": false,
+});
+
 //SOLID single use.
 function createMapArea(flightsArray) {
 	//Var vs const ... assignments
-	const map = L.map("map").setView([51.505, -0.09], 13, {
-		dragging: false,
-		"attribution-control": false,
-	});
 
 	L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 		maxZoom: 19,
@@ -33,7 +34,10 @@ function createMapArea(flightsArray) {
 
 function moveToFlight(latitude, longtitude) {
 	if (latitude && longtitude) {
-		L.map().flyTo(latitude, longtitude, 1);
+		console.log({ "Lat: ": latitude, Long: longtitude });
+		map.flyTo([latitude, longtitude], 10, {
+			animate: true,
+		});
 	}
 }
 

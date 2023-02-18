@@ -42,7 +42,10 @@ html {
 		display: grid;
 		grid-template-columns: 12;
 		grid-template-rows: 12;
-		display: none;
+
+		&--hidden {
+			display: none;
+		}
 	}
 
 	.container__map-component {

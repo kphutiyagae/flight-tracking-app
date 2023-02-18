@@ -25,7 +25,6 @@ function createMapArea(flightsArray) {
 		popupAnchor: [-3, -76],
 	});
 
-	//
 	flightsArray.forEach((flight) => {
 		if (flight[6] && flight[5])
 			L.marker([flight[6], flight[5]], { icon: planeIcon }).addTo(map);
@@ -34,7 +33,6 @@ function createMapArea(flightsArray) {
 
 function moveToFlight(latitude, longtitude) {
 	if (latitude && longtitude) {
-		console.log({ "Lat: ": latitude, Long: longtitude });
 		map.flyTo([latitude, longtitude], 10, {
 			animate: true,
 		});

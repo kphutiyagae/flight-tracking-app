@@ -77,4 +77,38 @@ function populateListComponent(statesVector, startIndex, endIndex) {
 }
 //Poor practice to remove component and not eventListner.
 
-export { createListItem, populateListComponent, getClass };
+function filterFlights(key, value, flightArray) {
+	if (key && value && flightArray) {
+	}
+}
+
+function bindOnClicksToButtons() {
+	document.querySelector(".filter-options__close-button").onclick = () => {
+		toggleFilterOptionsMenu();
+	};
+
+	document.querySelector(".list-options__filter-button").onclick = () => {
+		toggleFilterOptionsMenu();
+	};
+}
+
+function toggleFilterOptionsMenu() {
+	const menu = document.querySelector(".container__filter-options");
+
+	if (menu.classList.contains("container__filter-options--hidden")) {
+		menu.classList.remove("container__filter-options--hidden");
+		menu.classList.add("container__filter-options--showing");
+	} else {
+		menu.classList.remove("container__filter-options--showing");
+		menu.classList.add("container__filter-options--hidden");
+	}
+}
+
+//Query selector to check if size of retunred array is 0 for selecting.
+export {
+	createListItem,
+	populateListComponent,
+	getClass,
+	toggleFilterOptionsMenu,
+	bindOnClicksToButtons,
+};

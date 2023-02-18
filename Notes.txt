@@ -1,0 +1,14 @@
+dom-manip:26 -> Check out enums.
+
+dom-manip:37,38 -> Array length is it realy 17?
+                   Trust nothing. 
+
+dom-manip:71 -> Naming conv. - be verbose
+
+dom-manip:83 -> Poor practice to remove component and not eventListner.
+
+map-service:8 -> SOLID single use.
+
+map-service:10 -> Var vs const ... assignments
+
+map-service:38 -> Automatically zoom to closest.

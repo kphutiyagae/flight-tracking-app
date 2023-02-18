@@ -1,5 +1,6 @@
 import "leaflet/dist/leaflet.css";
 import {
+	bindOnChangeToFilterOptions,
 	bindOnClicksToButtons,
 	populateListComponent,
 	toggleFilterOptionsMenu,
@@ -12,11 +13,12 @@ let flightsArray = [];
 
 bindOnClicksToButtons();
 
+bindOnChangeToFilterOptions();
+
 const statesVect = getAllStates();
 
 statesVect.then((data) => {
 	flightsArray = data;
-	console.log(flightsArray);
 	createMapArea(data);
 	populateListComponent(data, 0, 12);
 });

@@ -5,10 +5,7 @@ const map = L.map("map").setView([51.505, -0.09], 13, {
 	"attribution-control": false,
 });
 
-//SOLID single use.
 function createMapArea(flightsArray) {
-	//Var vs const ... assignments
-
 	L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 		maxZoom: 19,
 		attribution:
@@ -39,5 +36,4 @@ function moveToFlight(latitude, longtitude) {
 	}
 }
 
-//automatically zom to closest.
 export { createMapArea, moveToFlight };

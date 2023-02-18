@@ -23,13 +23,16 @@ flightClass.set(18, "Point Obstacle");
 flightClass.set(19, "Cluster Obstacle");
 flightClass.set(20, "Line Obstacle");
 
-//Check out enums.
+const flightFilterOptions = {
+	originCountry: null,
+	flightStatus: null,
+	flightCategory: null,
+};
 
 function getClass(i) {
 	return flightClass.get(i);
 }
-//Array length is it realy 17?
-//Trust nothing.
+
 function createListItem(stateVector) {
 	if (stateVector !== null) {
 		const list_component = document.getElementById("container__list-component");
@@ -63,7 +66,6 @@ function onFlightClick(event) {
 	}
 }
 
-//Naming conv. - be verbose
 function populateListComponent(statesVector, startIndex, endIndex) {
 	const list_component = document.getElementById("container__list-component");
 
@@ -75,7 +77,6 @@ function populateListComponent(statesVector, startIndex, endIndex) {
 		list_component.appendChild(createListItem(flight));
 	});
 }
-//Poor practice to remove component and not eventListner.
 
 function filterFlights(key, value, flightArray) {
 	if (key && value && flightArray) {
@@ -83,32 +84,98 @@ function filterFlights(key, value, flightArray) {
 }
 
 function bindOnClicksToButtons() {
-	document.querySelector(".filter-options__close-button").onclick = () => {
-		toggleFilterOptionsMenu();
-	};
+	const openFilterMenuButton = document.querySelector(
+		".list-options__filter-button"
+	);
+	const closeFilterMenuButton = document.querySelector(
+		".filter-options__close-button"
+	);
 
-	document.querySelector(".list-options__filter-button").onclick = () => {
-		toggleFilterOptionsMenu();
-	};
+	const applyFlightFiltersButton = document.querySelector(
+		".filter-options__apply-button"
+	);
+
+	if (openFilterMenuButton) {
+		openFilterMenuButton.onclick = () => {
+			toggleFilterOptionsMenu();
+		};
+	}
+	if (closeFilterMenuButton) {
+		closeFilterMenuButton.onclick = () => {
+			toggleFilterOptionsMenu();
+		};
+	}
+	if (applyFlightFiltersButton) {
+		applyFlightFiltersButton.onclick = () => {
+			applyFlightFilters(flightFilterOptions);
+		};
+	}
+}
+
+function bindOnChangeToFilterOptions() {
+	const originCountryInput = document.querySelector(".origin-country-input");
+	const flightStatusInput = document.querySelectorAll(".flight-status__option");
+	const flightCategoryInput = document.querySelector(".flight-status");
+
+	if (originCountryInput)
+		originCountryInput.onchange = (event) => {
+			onFlightFilterChange(
+				"originCountry",
+				event.target.value,
+				flightFilterOptions
+			);
+		};
+
+	if (flightStatusInput) {
+		flightStatusInput.forEach((statusInput) => {
+			statusInput.onclick = (event) => {
+				onFlightFilterChange(
+					"flightStatus",
+					event.target.value,
+					flightFilterOptions
+				);
+			};
+		});
+	}
+
+	if (flightCategoryInput)
+		flightCategoryInput.onchange = (event) => {
+			onFlightFilterChange(
+				"flightCategory",
+				event.target.value,
+				flightFilterOptions
+			);
+		};
 }
 
 function toggleFilterOptionsMenu() {
 	const menu = document.querySelector(".container__filter-options");
-
-	if (menu.classList.contains("container__filter-options--hidden")) {
-		menu.classList.remove("container__filter-options--hidden");
-		menu.classList.add("container__filter-options--showing");
-	} else {
-		menu.classList.remove("container__filter-options--showing");
-		menu.classList.add("container__filter-options--hidden");
+	if (menu) {
+		if (menu.classList.contains("container__filter-options--hidden")) {
+			menu.classList.remove("container__filter-options--hidden");
+			menu.classList.add("container__filter-options--showing");
+		} else {
+			menu.classList.remove("container__filter-options--showing");
+			menu.classList.add("container__filter-options--hidden");
+		}
 	}
 }
 
-//Query selector to check if size of retunred array is 0 for selecting.
+function onFlightFilterChange(filterKey, filterValue, flightFilterOptions) {
+	if (filterKey && flightFilterOptions) {
+		flightFilterOptions[`${filterKey}`] = `${filterValue}`;
+	}
+}
+
+function applyFlightFilters(filterOptions) {
+	console.log(filterOptions);
+}
+
 export {
 	createListItem,
 	populateListComponent,
 	getClass,
 	toggleFilterOptionsMenu,
 	bindOnClicksToButtons,
+	bindOnChangeToFilterOptions,
 };

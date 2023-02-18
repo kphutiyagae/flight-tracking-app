@@ -8,8 +8,8 @@ const map = L.map("map").setView([51.505, -0.09], 13, {
 const planeIcon = L.icon({
 	iconUrl: "plane.png",
 	shadowUrl: "shadow.png",
-	iconSize: [50, 50],
-	shadowSize: [60, 64],
+	iconSize: [30, 30],
+	shadowSize: [35, 35],
 	iconAnchor: [10, 10],
 	shadowAnchor: [10, 10],
 	popupAnchor: [-3, -76],

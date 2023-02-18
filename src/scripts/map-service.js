@@ -5,27 +5,40 @@ const map = L.map("map").setView([51.505, -0.09], 13, {
 	"attribution-control": false,
 });
 
-function createMapArea(flightsArray) {
+const planeIcon = L.icon({
+	iconUrl: "plane.png",
+	shadowUrl: "shadow.png",
+	iconSize: [50, 50],
+	shadowSize: [60, 64],
+	iconAnchor: [10, 10],
+	shadowAnchor: [10, 10],
+	popupAnchor: [-3, -76],
+});
+
+function createMapArea() {
 	L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 		maxZoom: 19,
 		attribution:
 			'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 	}).addTo(map);
+}
 
-	const planeIcon = L.icon({
-		iconUrl: "plane.png",
-		shadowUrl: "shadow.png",
-		iconSize: [50, 50],
-		shadowSize: [60, 64],
-		iconAnchor: [10, 10],
-		shadowAnchor: [10, 10],
-		popupAnchor: [-3, -76],
-	});
+function addFlightsToMap(flightsArray, numberOfFlights) {
+	if (flightsArray) {
+		for (let i = 0; i < numberOfFlights; i++) {
+			if (
+				flightsArray[i].length <= 18 &&
+				flightsArray[i][5] &&
+				flightsArray[i][6]
+			) {
+				L.marker([flightsArray[i][6], flightsArray[i][5]], {
+					icon: planeIcon,
+				}).addTo(map);
+			}
+		}
 
-	flightsArray.forEach((flight) => {
-		if (flight[6] && flight[5])
-			L.marker([flight[6], flight[5]], { icon: planeIcon }).addTo(map);
-	});
+		moveToFlight(flightsArray[0][6], flightsArray[0][5]);
+	}
 }
 
 function moveToFlight(latitude, longtitude) {
@@ -36,4 +49,4 @@ function moveToFlight(latitude, longtitude) {
 	}
 }
 
-export { createMapArea, moveToFlight };
+export { createMapArea, moveToFlight, addFlightsToMap };

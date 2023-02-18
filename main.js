@@ -1,5 +1,6 @@
 import "leaflet/dist/leaflet.css";
 import {
+	addFilterOptions,
 	bindOnChangeToFilterOptions,
 	bindOnClicksToButtons,
 	populateListComponent,
@@ -7,9 +8,11 @@ import {
 } from "./src/scripts/dom-manip";
 import "./src/stylesheets/styles.scss";
 import { getAllStates } from "./src/scripts/api-service";
-import { createMapArea } from "./src/scripts/map-service";
+import { addFlightsToMap, createMapArea } from "./src/scripts/map-service";
 
 let flightsArray = [];
+
+addFilterOptions();
 
 bindOnClicksToButtons();
 
@@ -19,6 +22,7 @@ const statesVect = getAllStates();
 
 statesVect.then((data) => {
 	flightsArray = data;
-	createMapArea(data);
-	populateListComponent(data, 0, 12);
+	createMapArea();
+	addFlightsToMap(data, 20);
+	populateListComponent(data, 20);
 });

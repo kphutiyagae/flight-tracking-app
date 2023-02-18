@@ -115,7 +115,7 @@ function bindOnClicksToButtons() {
 function bindOnChangeToFilterOptions() {
 	const originCountryInput = document.querySelector(".origin-country-input");
 	const flightStatusInput = document.querySelectorAll(".flight-status__option");
-	const flightCategoryInput = document.querySelector(".flight-status");
+	const flightCategoryInput = document.querySelector(".flight-category-input");
 
 	if (originCountryInput)
 		originCountryInput.onchange = (event) => {
@@ -161,6 +161,19 @@ function toggleFilterOptionsMenu() {
 	}
 }
 
+function addFilterOptions() {
+	const flightCategoryInput = document.querySelector(".flight-category-input");
+
+	if (flightCategoryInput) {
+		flightClass.forEach((flightCategory) => {
+			const flightCategoryOption = document.createElement("option");
+			flightCategoryOption.value = flightCategory;
+			flightCategoryOption.innerText = flightCategory;
+			flightCategoryInput.appendChild(flightCategoryOption);
+		});
+	}
+}
+
 function onFlightFilterChange(filterKey, filterValue, flightFilterOptions) {
 	if (filterKey && flightFilterOptions) {
 		flightFilterOptions[`${filterKey}`] = `${filterValue}`;
@@ -178,4 +191,5 @@ export {
 	toggleFilterOptionsMenu,
 	bindOnClicksToButtons,
 	bindOnChangeToFilterOptions,
+	addFilterOptions,
 };

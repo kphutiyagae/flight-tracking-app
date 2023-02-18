@@ -45,6 +45,13 @@ html {
 		row-gap: 1.5rem;
 		column-gap: 1.2rem;
 
+		button {
+			border: none;
+			padding: 1.1rem;
+			border-radius: 6px;
+			font-weight: bold;
+		}
+
 		.filter-options__close-button {
 			grid-row: 9 / 10;
 			grid-column: 9 / 10;
@@ -94,7 +101,6 @@ html {
 			display: flex;
 			flex-direction: column;
 			flex-shrink: 0;
-
 			label,
 			p {
 				margin-top: 0.8rem;

@@ -3,14 +3,11 @@ import {
 	addFilterOptions,
 	bindOnChangeToFilterOptions,
 	bindOnClicksToButtons,
-	populateListComponent,
-	toggleFilterOptionsMenu,
+	addFlightsToList,
 } from "./src/scripts/dom-manip";
 import "./src/stylesheets/styles.scss";
 import { getAllStates } from "./src/scripts/api-service";
 import { addFlightsToMap, createMapArea } from "./src/scripts/map-service";
-
-let flightsArray = [];
 
 addFilterOptions();
 
@@ -21,8 +18,11 @@ bindOnChangeToFilterOptions();
 const statesVect = getAllStates();
 
 statesVect.then((data) => {
-	flightsArray = data;
-	createMapArea();
-	addFlightsToMap(data, 20);
-	populateListComponent(data, 20);
+	if (data.length >= 30) {
+		createMapArea();
+
+		addFlightsToMap(data.slice(0, 30));
+
+		addFlightsToList(data.slice(0, 30));
+	}
 });

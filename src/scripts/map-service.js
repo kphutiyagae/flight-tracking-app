@@ -1,6 +1,6 @@
 import L from "leaflet";
 
-const map = L.map("map").setView([51.505, -0.09], 13, {
+const map = L.map("map").setView([51.505, -0.09], 1, {
 	dragging: false,
 	"attribution-control": false,
 });
@@ -23,20 +23,18 @@ function createMapArea() {
 	}).addTo(map);
 }
 
-function addFlightsToMap(flightsArray, numberOfFlights) {
+function addFlightsToMap(flightsArray) {
 	if (flightsArray) {
-		for (let i = 0; i < numberOfFlights; i++) {
-			if (
-				flightsArray[i].length <= 18 &&
-				flightsArray[i][5] &&
-				flightsArray[i][6]
-			) {
-				L.marker([flightsArray[i][6], flightsArray[i][5]], {
+		flightsArray.forEach(flight => {
+
+			if(flight.length == 18 && (flight[5] && flight[6]) )
+			{
+				L.marker([flight[6], flight[5]], {
 					icon: planeIcon,
 				}).addTo(map);
-			}
-		}
 
+			}
+		});
 		moveToFlight(flightsArray[0][6], flightsArray[0][5]);
 	}
 }

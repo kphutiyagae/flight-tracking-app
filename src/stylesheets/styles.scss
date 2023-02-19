@@ -134,12 +134,13 @@ html {
 			z-index: 2;
 			grid-row: 1/11;
 			grid-column: 1/8;
-			display: grid;
+			display: none;
 			grid-template-columns: repeat(10, 1fr);
 			grid-template-rows: repeat(10, 1fr);
 			row-gap: 1.5rem;
 			column-gap: 1.2rem;
 			font-family: "Questrial", sans-serif;
+			
 
 			button {
 				border: none;
@@ -214,9 +215,10 @@ html {
 				}
 			}
 
-			&--hidden {
-				display: none;
+			&--show {
+				display: grid;
 			}
+
 		}
 
 		.list-component__item {

@@ -8,6 +8,4 @@ async function getAllStates() {
 		});
 }
 
-//Make use of observable.
-
 export { getAllStates };

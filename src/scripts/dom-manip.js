@@ -33,24 +33,29 @@ function getClass(i) {
 	return flightClass.get(i);
 }
 
-function createListItem(stateVector) {
-	if (stateVector !== null) {
+function createFlight(flightsArray) {
+	if (flightsArray && flightsArray.length) {
 		const list_component = document.getElementById("container__list-component");
+
 		const node = document.createElement("div");
-		node.dataset.id = `${stateVector[0]}`;
 
-		node.dataset.lat = `${stateVector[6]}`;
+		node.dataset.id = `${flightsArray[0]}`;
 
-		node.dataset.long = `${stateVector[5]}`;
+		node.dataset.lat = `${flightsArray[6]}`;
+
+		node.dataset.long = `${flightsArray[5]}`;
 
 		node.classList = "list-component__item";
 
 		node.onclick = (event) => onFlightClick(event);
 
-		node.innerHTML = `<h3> ${stateVector[1] ?? "Unavailable"}</h3>\n
-        <p> ${stateVector[2]} </p>\n
-        <p> ${flightClass.get(parseInt(stateVector[17]))} </p>\n
-        </div>`;
+		node.innerHTML = `<h3> ${flightsArray[1] ?? "Unavailable"}</h3>\n
+        
+		<p> ${flightsArray[2]} </p>\n
+        
+		<p> ${flightClass.get(parseInt(flightsArray[17]))} </p>\n
+        
+		</div>`;
 
 		return node;
 	}
@@ -66,15 +71,13 @@ function onFlightClick(event) {
 	}
 }
 
-function populateListComponent(statesVector, startIndex, endIndex) {
+function addFlightsToList(flightsArray) {
 	const list_component = document.getElementById("container__list-component");
 
-	const flightsArray = statesVector.slice(startIndex, endIndex);
-
-	flightsArray.map((flight) => {
-		if (flight[6] & flight[5]) {
+	flightsArray.forEach((flight) => {
+		if (flight.length == 18 && flight[5] && flight[6]) {
+			list_component.appendChild(createFlight(flight));
 		}
-		list_component.appendChild(createListItem(flight));
 	});
 }
 
@@ -148,16 +151,15 @@ function bindOnChangeToFilterOptions() {
 		};
 }
 
+/* 
+From lecture example by Timothy H.
+*/
 function toggleFilterOptionsMenu() {
 	const menu = document.querySelector(".container__filter-options");
 	if (menu) {
-		if (menu.classList.contains("container__filter-options--hidden")) {
-			menu.classList.remove("container__filter-options--hidden");
-			menu.classList.add("container__filter-options--showing");
-		} else {
-			menu.classList.remove("container__filter-options--showing");
-			menu.classList.add("container__filter-options--hidden");
-		}
+		if (menu.classList.contains("container__filter-options--show"))
+			menu.classList.remove("container__filter-options--show");
+		else menu.classList.add("container__filter-options--show");
 	}
 }
 
@@ -185,8 +187,8 @@ function applyFlightFilters(filterOptions) {
 }
 
 export {
-	createListItem,
-	populateListComponent,
+	createFlight,
+	addFlightsToList,
 	getClass,
 	toggleFilterOptionsMenu,
 	bindOnClicksToButtons,

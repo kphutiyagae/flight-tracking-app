@@ -8,8 +8,8 @@ import {
 
 import { flightData$ } from "./observables";
 import { mapObserver } from "./map-service";
-import { switchMap } from "rxjs/operators";
 import { listObserver } from "./dom-manip";
+
 async function getAllStates() {
 	if (!(await isRequestInCache(`${baseUrl}/states/all?extended=1`))) {
 		addRequestToCache(`${baseUrl}/states/all?extended=1`);
@@ -27,12 +27,9 @@ async function getAllStates() {
 	}
 }
 
-async function getAllStatesV2() {
-	if (!(await isRequestInCache(`${baseUrl}/states/all?extended=1`))) {
-		flightData$.subscribe(mapObserver);
-		flightData$.subscribe(listObserver);
-	} else {
-	}
+async function showFlightDataAndPopulateMap() {
+	flightData$.subscribe(mapObserver);
+	flightData$.subscribe(listObserver);
 }
 
-export { getAllStates, getAllStatesV2 };
+export { getAllStates, showFlightDataAndPopulateMap };

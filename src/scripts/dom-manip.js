@@ -190,8 +190,9 @@ const listObserver = {
 	next: (flightDataArray) => {
 		addFlightsToList(flightDataArray);
 	},
-	error: {},
-	complete: {},
+	error: (error) => {
+		return error;
+	},
 };
 
 export {

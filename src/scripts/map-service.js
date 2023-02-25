@@ -1,5 +1,4 @@
 import L from "leaflet";
-import { flightData$ } from "./observables";
 
 const map = L.map("map").setView([51.505, -0.09], 1, {
 	dragging: false,
@@ -49,7 +48,9 @@ const mapObserver = {
 	next: (flightDataArray) => {
 		addFlightsToMap(flightDataArray);
 	},
-	error: (error) => {}, //TODO: Add error function to error observable
+	error: (error) => {
+		return error;
+	},
 };
 
 export { createMapArea, moveToFlight, addFlightsToMap, mapObserver };

@@ -1,11 +1,15 @@
+import { baseUrl } from "./routes";
+
 import {
 	isRequestInCache,
 	addRequestToCache,
 	getCachedRequest,
 } from "./web-storage";
 
-const baseUrl = "http://opensky-network.org/api";
-
+import { flightData$ } from "./observables";
+import { mapObserver } from "./map-service";
+import { switchMap } from "rxjs/operators";
+import { listObserver } from "./dom-manip";
 async function getAllStates() {
 	if (!(await isRequestInCache(`${baseUrl}/states/all?extended=1`))) {
 		addRequestToCache(`${baseUrl}/states/all?extended=1`);
@@ -23,4 +27,12 @@ async function getAllStates() {
 	}
 }
 
-export { getAllStates };
+async function getAllStatesV2() {
+	if (!(await isRequestInCache(`${baseUrl}/states/all?extended=1`))) {
+		flightData$.subscribe(mapObserver);
+		flightData$.subscribe(listObserver);
+	} else {
+	}
+}
+
+export { getAllStates, getAllStatesV2 };

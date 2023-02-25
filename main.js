@@ -6,15 +6,17 @@ import {
 	addFlightsToList,
 } from "./src/scripts/dom-manip";
 import "./src/stylesheets/styles.scss";
-import { getAllStates } from "./src/scripts/api-service";
+import { getAllStates, getAllStatesV2 } from "./src/scripts/api-service";
 import { addFlightsToMap, createMapArea } from "./src/scripts/map-service";
+import { flightData$ } from "./src/scripts/observables";
+import { isRequestInCache } from "./src/scripts/web-storage";
 
 addFilterOptions();
 
 bindOnClicksToButtons();
 
 bindOnChangeToFilterOptions();
-
+/*
 const statesVect = getAllStates();
 
 statesVect.then((data) => {
@@ -26,3 +28,8 @@ statesVect.then((data) => {
 		addFlightsToList(data.slice(0, 30));
 	}
 });
+
+*/
+createMapArea();
+
+getAllStatesV2();

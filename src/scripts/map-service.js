@@ -1,4 +1,5 @@
 import L from "leaflet";
+import { flightData$ } from "./observables";
 
 const map = L.map("map").setView([51.505, -0.09], 1, {
 	dragging: false,
@@ -25,14 +26,11 @@ function createMapArea() {
 
 function addFlightsToMap(flightsArray) {
 	if (flightsArray) {
-		flightsArray.forEach(flight => {
-
-			if(flight.length == 18 && (flight[5] && flight[6]) )
-			{
+		flightsArray.forEach((flight) => {
+			if (flight.length == 18 && flight[5] && flight[6]) {
 				L.marker([flight[6], flight[5]], {
 					icon: planeIcon,
 				}).addTo(map);
-
 			}
 		});
 		moveToFlight(flightsArray[0][6], flightsArray[0][5]);
@@ -47,4 +45,11 @@ function moveToFlight(latitude, longtitude) {
 	}
 }
 
-export { createMapArea, moveToFlight, addFlightsToMap };
+const mapObserver = {
+	next: (flightDataArray) => {
+		addFlightsToMap(flightDataArray);
+	},
+	error: (error) => {}, //TODO: Add error function to error observable
+};
+
+export { createMapArea, moveToFlight, addFlightsToMap, mapObserver };

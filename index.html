@@ -8,46 +8,12 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300&family=Lexend+Deca:wght@300;400;600&family=Questrial&family=Rubik+Mono+One&display=swap');
   </style>
-  <title>Flight Tracker App</title>
+  <title>Flightly</title>
+  <link rel="stylesheet" href="./dist/stylesheets/styles.css">
 </head>
 
 <body>
   <div class="container">
-    <div class="container__filter-options">
-      <div class="filter-options__input options__origin-country">
-        <label for="origin-country" class="filter-option__filter-label">Country of Origin:</label>
-        <select name="origin-country" class="origin-country-input">
-          <option value="null">Select Country</option>
-          <option value="test">Country 1</option>
-        </select>
-      </div>
-      <div class="filter-options__input options__flight-status">
-        <p>Flight Status:</p>
-        <fieldset>
-          <div class="flight-status__row">
-            <label for="null">None</label>
-            <input type="radio" id="null" name="flight-status" class="flight-status__option" value="null">
-          </div>
-          <div class="flight-status__row">
-            <label for="flying">Flying</label>
-            <input type="radio" id="flying" name="flight-status" class="flight-status__option" value="flying">
-          </div>
-          <div class="flight-status__row">
-            <label for="flying">Landed</label>
-            <input type="radio" id="landed" name="flight-status" class="flight-status__option" value="landed">
-          </div>
-        </fieldset>
-      </div>
-      <div class="filter-options__input options__flight-category">
-        <label for="flight-category">Flight category:</label>
-        <select name="flight-category" class="flight-category-input">
-          <option value="null">Select category</option>
-        </select>
-      </div>
-
-      <button class="filter-options__close-button">Close</button>
-      <button class="filter-options__apply-button">Apply</button>
-    </div>
     <div class="container__nav-bar">
       <h2 class="logo">Flightly</h2>
     </div>

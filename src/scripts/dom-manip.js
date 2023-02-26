@@ -46,7 +46,7 @@ function createFlight(flightsArray) {
 		node.dataset.long = `${flightsArray[5]}`;
 
 		node.classList =
-			"list-component__item bg-secondary-theme-color pt-4 m-1 pb-3.5 rounded-md";
+			"list-component__item bg-secondary-theme-color pt-4 m-1 pb-3.5 rounded-md cursor-pointer";
 
 		node.onclick = (event) => onFlightClick(event);
 
@@ -58,7 +58,7 @@ function createFlight(flightsArray) {
 			flightsArray[2]
 		} </p>\n
         
-		<p class="ml-7 text-lg font-bold text-text-color-subtitle"> ${flightClass.get(
+		<p class="ml-7 text-sm font-light text-text-color-subtitle"> ${flightClass.get(
 			parseInt(flightsArray[17])
 		)} </p>\n
         

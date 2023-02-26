@@ -186,6 +186,15 @@ function applyFlightFilters(filterOptions) {
 	console.log(filterOptions);
 }
 
+const listObserver = {
+	next: (flightDataArray) => {
+		addFlightsToList(flightDataArray);
+	},
+	error: (error) => {
+		return error;
+	},
+};
+
 export {
 	createFlight,
 	addFlightsToList,
@@ -194,4 +203,5 @@ export {
 	bindOnClicksToButtons,
 	bindOnChangeToFilterOptions,
 	addFilterOptions,
+	listObserver,
 };

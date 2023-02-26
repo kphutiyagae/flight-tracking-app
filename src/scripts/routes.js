@@ -1,3 +1,3 @@
-const baseUrl = "http://opensky-network.org/api";
+const baseUrl = "https://opensky-network.org/api";
 
 export { baseUrl };

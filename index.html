@@ -8,67 +8,22 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300&family=Lexend+Deca:wght@300;400;600&family=Questrial&family=Rubik+Mono+One&display=swap');
   </style>
-  <title>Flight Tracker App</title>
+  <title>Flightly</title>
+  <link rel="stylesheet" href="./dist/stylesheets/styles.css">
 </head>
 
 <body>
-  <div class="container">
-    <div class="container__filter-options">
-      <div class="filter-options__input options__origin-country">
-        <label for="origin-country" class="filter-option__filter-label">Country of Origin:</label>
-        <select name="origin-country" class="origin-country-input">
-          <option value="null">Select Country</option>
-          <option value="test">Country 1</option>
-        </select>
-      </div>
-      <div class="filter-options__input options__flight-status">
-        <p>Flight Status:</p>
-        <fieldset>
-          <div class="flight-status__row">
-            <label for="null">None</label>
-            <input type="radio" id="null" name="flight-status" class="flight-status__option" value="null">
-          </div>
-          <div class="flight-status__row">
-            <label for="flying">Flying</label>
-            <input type="radio" id="flying" name="flight-status" class="flight-status__option" value="flying">
-          </div>
-          <div class="flight-status__row">
-            <label for="flying">Landed</label>
-            <input type="radio" id="landed" name="flight-status" class="flight-status__option" value="landed">
-          </div>
-        </fieldset>
-      </div>
-      <div class="filter-options__input options__flight-category">
-        <label for="flight-category">Flight category:</label>
-        <select name="flight-category" class="flight-category-input">
-          <option value="null">Select category</option>
-        </select>
-      </div>
+  <div class="w-full h-full bg-slate-400 grid grid-cols-6 grid-rows-10">
+    <div
+      class="container__nav-bar bg-primary-theme-color col-start-1 col-end-7 row-start-1 row-end-2 flex flex-row justify-center items-center ">
+      <h2 class="logo text-secondary-theme-color font-bold text-xl">Flightly</h2>
+    </div>
+    <div id="map"
+      class="container__map-component row-start-2 row-end-6 col-start-1 col-end-7 md:col-start-3 md:col-end-8 md:row-start-2 md:row-end-11 lg:col-start-1 lg:col-end-7 z-0">
+    </div>
+    <div id="container__list-component"
+      class="bg-primary-theme-color col-start-1 col-end-7 row-start-6 row-end-11 md:row-start-2 md:row-end-11 md:col-start-1 md:w-1/3 lg:z-10 lg:bg-transparent">
 
-      <button class="filter-options__close-button">Close</button>
-      <button class="filter-options__apply-button">Apply</button>
-    </div>
-    <div class="container__nav-bar">
-      <h2 class="logo">Flightly</h2>
-    </div>
-    <div id="map" class="container__map-component">
-    </div>
-    <div id="container__list-component">
-    </div>
-    <div class="container__list-options">
-      <button class="list-options__filter-button">
-        <p class="filter-button__filter-text">Filter</p>
-        <svg class="filter-button__filter-icon" stroke="currentColor" fill="currentColor" stroke-width="0"
-          viewBox="0 0 24 24" height="2em" width="2em" xmlns="http://www.w3.org/2000/svg">
-          <path fill="none" d="M0 0h24v24H0V0zM0 0h24m0 24H0"></path>
-          <path
-            d="M4.25 5.66c.1.13 5.74 7.33 5.74 7.33V19c0 .55.45 1 1.01 1h2.01c.55 0 1.01-.45 1.01-1v-6.02s5.49-7.02 5.75-7.34C20.03 5.32 20 5 20 5c0-.55-.45-1-1.01-1H5.01C4.4 4 4 4.48 4 5c0 .2.06.44.25.66z">
-          </path>
-        </svg>
-      </button>
-      <button class="list-options__clear-button">
-        <p>Clear</p>
-      </button>
     </div>
   </div>
   <script type="module" src="/main.js"></script>

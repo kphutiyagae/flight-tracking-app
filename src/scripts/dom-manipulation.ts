@@ -37,7 +37,7 @@ function onFlightClick(event: MouseEvent): void {
     const clickedElement: HTMLElement = event.target as HTMLElement;
 
     if (clickedElement.dataset && clickedElement.dataset.lat && clickedElement.dataset.long) {
-        moveToFlight(clickedElement.dataset.lat, clickedElement.dataset.long);
+        moveToFlight(Number(clickedElement.dataset.lat), Number(clickedElement.dataset.long));
     }
 }
 

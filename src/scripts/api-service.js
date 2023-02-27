@@ -1,11 +1,18 @@
-const baseUrl = "http://opensky-network.org/api";
+import { baseUrl } from "./routes";
 
-async function getAllStates() {
-	return await fetch(`${baseUrl}/states/all?extended=1`)
-		.then((res) => res.json())
-		.then((data) => {
-			return data.states;
-		});
+import {
+	isRequestInCache,
+	addRequestToCache,
+	getCachedRequest,
+} from "./web-storage";
+
+import { flightData$ } from "./observables";
+import { mapObserver } from "./map-service";
+import { listObserver } from "./dom-manip";
+
+async function showFlightDataAndPopulateMap() {
+	flightData$.subscribe(mapObserver);
+	flightData$.subscribe(listObserver);
 }
 
-export { getAllStates };
+export { showFlightDataAndPopulateMap };

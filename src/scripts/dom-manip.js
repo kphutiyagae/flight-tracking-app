@@ -45,15 +45,22 @@ function createFlight(flightsArray) {
 
 		node.dataset.long = `${flightsArray[5]}`;
 
-		node.classList = "list-component__item";
+		node.classList =
+			"list-component__item bg-secondary-theme-color pt-4 m-1 pb-3.5 rounded-md cursor-pointer";
 
 		node.onclick = (event) => onFlightClick(event);
 
-		node.innerHTML = `<h3> ${flightsArray[1] ?? "Unavailable"}</h3>\n
+		node.innerHTML = `<h3 class="text-3xl ml-6 mb-5 text-text-color-title"> ${
+			flightsArray[1] ?? "Unavailable"
+		}</h3>\n
         
-		<p> ${flightsArray[2]} </p>\n
+		<p class="ml-7 text-lg font-bold text-text-color-subtitle"> ${
+			flightsArray[2]
+		} </p>\n
         
-		<p> ${flightClass.get(parseInt(flightsArray[17]))} </p>\n
+		<p class="ml-7 text-sm font-light text-text-color-subtitle"> ${flightClass.get(
+			parseInt(flightsArray[17])
+		)} </p>\n
         
 		</div>`;
 
@@ -186,6 +193,15 @@ function applyFlightFilters(filterOptions) {
 	console.log(filterOptions);
 }
 
+const listObserver = {
+	next: (flightDataArray) => {
+		addFlightsToList(flightDataArray);
+	},
+	error: (error) => {
+		return error;
+	},
+};
+
 export {
 	createFlight,
 	addFlightsToList,
@@ -194,4 +210,5 @@ export {
 	bindOnClicksToButtons,
 	bindOnChangeToFilterOptions,
 	addFilterOptions,
+	listObserver,
 };

@@ -1,5 +1,5 @@
 import L from "leaflet";
-import { IFlightArray } from "../types/interfaces";
+import { IFlight, IFlightArray } from "../types/interfaces";
 
 const map: L.Map = L.map("map", {
     center: new L.LatLng(51.505, -0.09),
@@ -29,9 +29,9 @@ function createMapArea(): void {
 function addFlightsToMap(flightsArray: IFlightArray): void {
     if (!flightsArray) return;
 
-    flightsArray.states.map((flight) => {
-        if (flight.length != 18 && flight[5] && flight[6]) {
-            L.marker([Number(flight[6]), Number(flight[5])], {
+    flightsArray.flightsArray.map((flight: IFlight) => {
+        if (flight.latitude && flight.longitude) {
+            L.marker([Number(flight.latitude), Number(flight.longitude)], {
                 icon: planeIcon,
             }).addTo(map);
         }

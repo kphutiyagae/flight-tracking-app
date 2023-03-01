@@ -2,10 +2,6 @@ export interface IFlightAPIResponse {
     time: number;
     states: IFlightArray;
 }
-export interface IFlightArray {
-    states: (boolean | number | string | null)[][]
-}
-
 export interface IFlight {
     icao24: string;
     callsign: string;
@@ -25,4 +21,12 @@ export interface IFlight {
     spi: boolean;
     position_source: number;
     category: number;
+}
+export interface IFlightArray {
+    flightsArray: IFlight[];
+}
+
+export interface ofError {
+    error: boolean;
+    message: string;
 }

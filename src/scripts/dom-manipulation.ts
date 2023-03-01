@@ -48,8 +48,8 @@ function addFlightsToList(flightsArray: IFlightArray): void {
 
     if (!flightList) return;
 
-    flightsArray.states.map((flight) => {
-        if (flight.length != 18 && flight[5] && flight[6]) {
+    flightsArray.flightsArray.map((flight: IFlight) => {
+        if (flight.category && flight.longitude && flight.latitude) {
             flightList.appendChild(createFlight(flight))
         }
     });

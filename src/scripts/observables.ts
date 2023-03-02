@@ -85,4 +85,4 @@ cachedOrRequestedFlightData$.subscribe((flightDataArray) =>
     flightData$.next(flightDataArray)
 );
 
-export { flightData$ };
+export { flightData$, isIFlightApiResponse };

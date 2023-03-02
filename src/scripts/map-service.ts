@@ -1,5 +1,5 @@
 import L from "leaflet";
-import { IFlight, IFlightArray } from "../types/interfaces";
+import { IFlight, IFlightArray, ofError } from "../types/interfaces";
 
 const map: L.Map = L.map("map", {
     center: new L.LatLng(51.505, -0.09),
@@ -26,10 +26,10 @@ function createMapArea(): void {
     }).addTo(map);
 }
 
-function addFlightsToMap(flightsArray: IFlightArray): void {
+function addFlightsToMap(flightsArray: IFlight[]): void {
     if (!flightsArray) return;
 
-    flightsArray.flightsArray.map((flight: IFlight) => {
+    flightsArray.map((flight: IFlight) => {
         if (flight.latitude && flight.longitude) {
             L.marker([Number(flight.latitude), Number(flight.longitude)], {
                 icon: planeIcon,
@@ -47,4 +47,13 @@ function moveToFlight(latitude: number, longtitude: number): void {
 
 }
 
-export { addFlightsToMap, createMapArea, moveToFlight }
+const mapObserver = {
+    next: (flightDataArray: IFlight[] | ofError) => {
+        addFlightsToMap(flightDataArray as IFlight[]);
+    },
+    error: (error: ofError) => {
+        return error;
+    },
+};
+
+export { addFlightsToMap, createMapArea, moveToFlight, mapObserver }

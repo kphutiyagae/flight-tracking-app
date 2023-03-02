@@ -1,12 +1,10 @@
-import { IFlight, IFlightArray } from "../types/interfaces";
+import { IFlight, ofError } from "../types/interfaces";
 import { flightCategory } from "./flight-category";
 import { moveToFlight } from "./map-service";
 
 function createFlight(flight: IFlight): HTMLDivElement {
 
     if (!flight) return;
-
-    const list_component: HTMLElement = document.getElementById("container__list-component");
 
     const node: HTMLDivElement = document.createElement("div");
 
@@ -29,6 +27,7 @@ function createFlight(flight: IFlight): HTMLDivElement {
 
     < /div>`;
 
+    return node;
 }
 
 function onFlightClick(event: MouseEvent): void {
@@ -41,14 +40,14 @@ function onFlightClick(event: MouseEvent): void {
     }
 }
 
-function addFlightsToList(flightsArray: IFlightArray): void {
+function addFlightsToList(flightsArray: IFlight[]): void {
     if (!flightsArray) return;
 
     const flightList = document.querySelector(".container__list-component");
 
     if (!flightList) return;
 
-    flightsArray.flightsArray.map((flight: IFlight) => {
+    flightsArray.map((flight: IFlight) => {
         if (flight.category && flight.longitude && flight.latitude) {
             flightList.appendChild(createFlight(flight))
         }
@@ -56,7 +55,18 @@ function addFlightsToList(flightsArray: IFlightArray): void {
 
 }
 
+const listObserver = {
+    next: (flightDataArray: IFlight[] | ofError) => {
+        addFlightsToList(flightDataArray as IFlight[]);
+    },
+    error: (error: ofError) => {
+        return error;
+    },
+};
+
+
 export {
     createFlight,
-    addFlightsToList
+    addFlightsToList,
+    listObserver
 }

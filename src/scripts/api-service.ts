@@ -8,3 +8,4 @@ function showFlightDataAndPopulateMap(): void {
 }
 
 export { showFlightDataAndPopulateMap };
+

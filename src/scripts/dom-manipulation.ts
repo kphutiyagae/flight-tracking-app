@@ -14,15 +14,15 @@ function createFlight(flight: IFlight): HTMLDivElement {
 
     node.dataset.long = flight.latitude ? flight.longitude.toString() : '0';
 
-    node.classList.add('list-component__item');
+    node.classList.add('list-component__item', 'bg-secondary-theme-color', 'pt-4', 'm-1', 'pb-3.5', 'rounded-md', 'cursor-pointer');
 
-    node.onclick = (event: MouseEvent) => onFlightClick(event);
+    node.onclick = (event: MouseEvent): void => onFlightClick(event as MouseEvent);
 
-    node.innerHTML = `<h3> ${flight.callsign ?? 'Unavailable'}</h3>\n
+    node.innerHTML = `<h3 class="text-3xl ml-6 mb-5 text-text-color-title"> ${flight.callsign ?? 'Unavailable'}</h3>\n
         
-    <p> ${flight.origin_country ?? 'Unknown country'} </p>\n
+    <p class="ml-7 text-lg font-bold text-text-color-subtitle" > ${flight.origin_country ?? 'Unknown country'} </p>\n
     
-    <p> ${(flight.category && flight.category <= 17) ? flightCategory[flight.category] : flightCategory[0]} </p>\n`;
+    <p class="ml-7 text-sm font-light text-text-color-subtitle"> ${(flight.category && flight.category <= 17) ? flightCategory[flight.category] : flightCategory[0]} </p>\n`;
 
     return node;
 }

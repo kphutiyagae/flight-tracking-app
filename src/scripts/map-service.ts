@@ -26,10 +26,6 @@ function createMapArea(): void {
     }).addTo(map);
 }
 
-function isIFlightArray(response: IFlight[] | ofError): response is IFlight[] {
-    return !Object.keys(response).includes('error');
-}
-
 function addFlightsToMap(flightsArray: IFlight[]): void {
 
     if (!flightsArray) return;

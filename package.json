@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "gts lint",
+    "lint": " npx eslint . --ext .ts",
     "clean": "gts clean",
     "compile": "tsc",
     "fix": "gts fix",

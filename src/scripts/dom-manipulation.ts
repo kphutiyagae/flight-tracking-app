@@ -40,11 +40,8 @@ function onFlightClick(event: MouseEvent): void {
 function addFlightsToList(flightsArray: IFlight[]): void {
     if (!flightsArray) return;
     const flightList = document.querySelector('#container__list-component');
-    console.log(flightList);
     if (!flightList) return;
-    console.log(flightsArray);
     flightsArray.map((flight: IFlight) => {
-        console.log(flight);
         if (flight.category && flight.longitude && flight.latitude) {
             const flightDivToBeRendered: HTMLDivElement = createFlight(flight);
             if (!flightDivToBeRendered)

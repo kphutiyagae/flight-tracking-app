@@ -1,6 +1,6 @@
 export interface IFlightAPIResponse {
     time: number;
-    states: IFlightArray;
+    states: string[];
 }
 export interface IFlight {
     icao24: string;

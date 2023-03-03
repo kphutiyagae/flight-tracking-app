@@ -1,7 +1,7 @@
-import L from "leaflet";
-import { IFlight, IFlightArray, ofError } from "../types/interfaces";
+import L from 'leaflet';
+import { IFlight, ofError } from '../types/interfaces';
 
-const map: L.Map = L.map("map", {
+const map: L.Map = L.map('map', {
     center: new L.LatLng(51.505, -0.09),
     zoom: 1,
     attributionControl: false,
@@ -9,8 +9,8 @@ const map: L.Map = L.map("map", {
 });
 
 const planeIcon = L.icon({
-    iconUrl: "plane.png",
-    shadowUrl: "shadow.png",
+    iconUrl: 'plane.png',
+    shadowUrl: 'shadow.png',
     iconSize: [30, 30],
     shadowSize: [35, 35],
     iconAnchor: [10, 10],
@@ -19,17 +19,21 @@ const planeIcon = L.icon({
 });
 
 function createMapArea(): void {
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution:
             '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
 }
 
-function addFlightsToMap(flightsArray: IFlight[]): void {
-    if (!flightsArray) return;
+function isIFlightArray(response: IFlight[] | ofError): response is IFlight[] {
+    return !Object.keys(response).includes('error');
+}
 
-    flightsArray.map((flight: IFlight) => {
+function addFlightsToMap(flightsArray: IFlight[]): void {
+
+    if (!flightsArray) return;
+    Array.from(flightsArray).map((flight: IFlight) => {
         if (flight.latitude && flight.longitude) {
             L.marker([Number(flight.latitude), Number(flight.longitude)], {
                 icon: planeIcon,
@@ -40,7 +44,7 @@ function addFlightsToMap(flightsArray: IFlight[]): void {
 
 function moveToFlight(latitude: number, longtitude: number): void {
     if (!latitude || !longtitude) return;
-
+    map.invalidateSize();
     map.flyTo([latitude, longtitude], 10, {
         animate: true,
     });

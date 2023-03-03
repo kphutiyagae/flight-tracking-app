@@ -1,5 +1,11 @@
 {
-  "extends": "./node_modules/gts/",
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "rules": {
     "no-console": 1
   }

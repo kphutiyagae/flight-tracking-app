@@ -1,5 +1,5 @@
-import { map, Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
-export const flightDataObservable$ = new Observable((subscriber) =>
-    subscriber.next()
-);
+const flightDataObservable$ = new Observable((subscriber) => subscriber.next());
+
+export default flightDataObservable$;

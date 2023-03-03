@@ -1,12 +1,12 @@
-import { IFlight, ofError } from "../types/interfaces";
-import { flightCategory } from "./flight-category";
-import { moveToFlight } from "./map-service";
+import { IFlight, ofError } from '../types/interfaces';
+import { flightCategory } from './flight-category';
+import { moveToFlight } from './map-service';
 
 function createFlight(flight: IFlight): HTMLDivElement {
 
-    if (!flight) return;
+    if (!flight) return null;
 
-    const node: HTMLDivElement = document.createElement("div");
+    const node: HTMLDivElement = document.createElement('div');
 
     node.id = flight.icao24 ?? '0';
 
@@ -14,18 +14,15 @@ function createFlight(flight: IFlight): HTMLDivElement {
 
     node.dataset.long = flight.latitude ? flight.longitude.toString() : '0';
 
-    node.classList.add("list-component__item");
+    node.classList.add('list-component__item');
 
     node.onclick = (event: MouseEvent) => onFlightClick(event);
 
-    node.innerHTML = `<h3> ${flight.callsign ?? "Unavailable"}</h3>\n
+    node.innerHTML = `<h3> ${flight.callsign ?? 'Unavailable'}</h3>\n
         
-    <p> ${flight.origin_country ?? "Unknown country"} </p>\n
+    <p> ${flight.origin_country ?? 'Unknown country'} </p>\n
     
-    <p> ${(flight.category && flight.category <= 17) ? flightCategory[flight.category] : flightCategory[0]
-        } </p>\n
-
-    < /div>`;
+    <p> ${(flight.category && flight.category <= 17) ? flightCategory[flight.category] : flightCategory[0]} </p>\n`;
 
     return node;
 }
@@ -42,14 +39,18 @@ function onFlightClick(event: MouseEvent): void {
 
 function addFlightsToList(flightsArray: IFlight[]): void {
     if (!flightsArray) return;
-
-    const flightList = document.querySelector(".container__list-component");
-
+    const flightList = document.querySelector('#container__list-component');
+    console.log(flightList);
     if (!flightList) return;
-
+    console.log(flightsArray);
     flightsArray.map((flight: IFlight) => {
+        console.log(flight);
         if (flight.category && flight.longitude && flight.latitude) {
-            flightList.appendChild(createFlight(flight))
+            const flightDivToBeRendered: HTMLDivElement = createFlight(flight);
+            if (!flightDivToBeRendered)
+                return;
+            flightList.appendChild(flightDivToBeRendered);
+
         }
     });
 

@@ -1,34 +1,34 @@
-//Derived from grad slides code.
-const apiRequestCacheName: string = "api-cache";
+// Derived from grad slides code.
+const apiRequestCacheName: string = 'api-cache';
 
 const cache: Promise<Cache> = caches.open(apiRequestCacheName);
 
 async function getCachedRequest(requestUrl: string) {
-    return (await cache).match(requestUrl);
+  return (await cache).match(requestUrl);
 }
 
 async function removeResponseFromCache(requestUrl: string): Promise<void> {
-    (await cache).delete(requestUrl);
+  (await cache).delete(requestUrl);
 }
 
 async function deleteEntireCache(): Promise<void> {
-    (await cache).delete(apiRequestCacheName);
+  (await cache).delete(apiRequestCacheName);
 }
 
 async function addRequestToCache(requestUrl: string): Promise<void> {
-    (await cache).add(new Request(requestUrl));
+  (await cache).add(new Request(requestUrl));
 }
 
 async function isRequestInCache(requestUrl: string) {
-    const request = await getCachedRequest(requestUrl);
-    if (!request) return false;
-    else return true;
+  const request = await getCachedRequest(requestUrl);
+  if (!request) return false;
+  return true;
 }
 
 export {
-    getCachedRequest,
-    isRequestInCache,
-    removeResponseFromCache,
-    deleteEntireCache,
-    addRequestToCache,
+  getCachedRequest,
+  isRequestInCache,
+  removeResponseFromCache,
+  deleteEntireCache,
+  addRequestToCache,
 };

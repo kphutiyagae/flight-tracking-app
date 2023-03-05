@@ -1,17 +1,11 @@
-import { baseUrl } from "./routes";
-import {
-    isRequestInCache,
-    addRequestToCache,
-    getCachedRequest,
-} from "./web-storage";
-
 import { flightData$ } from "./observables";
-import { mapObserver } from "./dom-manipulation";
-import { listObserver } from "./dom-manip";
+import { mapObserver } from "./map-service";
+import { listObserver } from "./dom-manipulation";
 
-async function showFlightDataAndPopulateMap(): Promise<void> {
+function showFlightDataAndPopulateMap(): void {
     flightData$.subscribe(mapObserver);
     flightData$.subscribe(listObserver);
 }
 
 export { showFlightDataAndPopulateMap };
+

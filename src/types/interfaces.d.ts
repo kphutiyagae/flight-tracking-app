@@ -26,7 +26,12 @@ export interface IFlightArray {
     flightsArray: IFlight[];
 }
 
-export interface ofError {
+export interface IofError {
     error: boolean;
     message: string;
+}
+
+export interface IObserver {
+    next: (flightDataArray: IFlight[] | IofError) => void;
+    error: (error: IofError) => IofError;
 }

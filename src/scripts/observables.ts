@@ -9,16 +9,16 @@ import {
 
 import { baseUrl } from './routes';
 
-import { IFlight, IFlightAPIResponse, ofError } from '../types/interfaces';
+import { IFlight, IFlightAPIResponse, IofError } from '../types/interfaces';
 
-const flightData$: Subject<IFlight[] | ofError> = new Subject();
+const flightData$: Subject<IFlight[] | IofError> = new Subject();
 
 function isIFlightApiResponse(response: IFlightAPIResponse | { error: boolean, message: string }): response is IFlightAPIResponse {
     return Object.keys(response).includes('states');
 }
 
 //Derived from rxjs documentation: https://rxjs.dev/api/fetch/fromFetch
-const requestedFlightData$: Observable<IFlight[] | ofError> = fromFetch(
+const requestedFlightData$: Observable<IFlight[] | IofError> = fromFetch(
     `${baseUrl}/states/all?extended=1`
 ).pipe(
     switchMap((response) => {
@@ -64,12 +64,13 @@ const requestedFlightData$: Observable<IFlight[] | ofError> = fromFetch(
     map(flightsArray => {
         return flightsArray
     }),
-    catchError((error: ofError) => {
-        return of({ error: true, message: `Error ${error.message}` });
+    catchError((e: IofError) => {
+        const error: IofError = { error: true, message: `Error ${e.message}` };
+        return of(error);
     })
 );
 
-const cachedFlightData$: Observable<IFlight[] | ofError> = from(
+const cachedFlightData$: Observable<IFlight[] | IofError> = from(
     getCachedRequest(`${baseUrl}/states/all?extended=1`)
 ).pipe(
     switchMap((response: Response) => {
@@ -113,8 +114,9 @@ const cachedFlightData$: Observable<IFlight[] | ofError> = from(
         return flightsArray;
 
     }),
-    catchError((error) => {
-        return of({ error: true, message: `Error ${error.status}` });
+    catchError((e: IofError) => {
+        const error: IofError = { error: true, message: `Error ${e.message}` };
+        return of(error);
     })
 );
 

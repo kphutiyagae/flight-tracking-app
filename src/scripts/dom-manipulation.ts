@@ -1,4 +1,4 @@
-import { IFlight, ofError } from '../types/interfaces';
+import { IFlight, IObserver, IofError } from '../types/interfaces';
 import { flightCategory } from './flight-category';
 import { moveToFlight } from './map-service';
 
@@ -18,11 +18,11 @@ function createFlight(flight: IFlight): HTMLDivElement {
 
     node.onclick = (event: MouseEvent): void => onFlightClick(event as MouseEvent);
 
-    node.innerHTML = `<h3 class="text-3xl ml-6 mb-5 text-text-color-title"> ${flight.callsign ?? 'Unavailable'}</h3>\n
+    node.innerHTML = `<h3 class="text-3xl ml-6 mb-5 text-text-color-title w-min"> ${flight.callsign ?? 'Unavailable'}</h3>\n
         
-    <p class="ml-7 text-lg font-bold text-text-color-subtitle" > ${flight.origin_country ?? 'Unknown country'} </p>\n
+    <p class="ml-7 text-lg font-bold text-text-color-subtitle w-fit" > ${flight.origin_country ?? 'Unknown country'} </p>\n
     
-    <p class="ml-7 text-sm font-light text-text-color-subtitle"> ${(flight.category && flight.category <= 17) ? flightCategory[flight.category] : flightCategory[0]} </p>\n`;
+    <p class="ml-7 text-sm font-light text-text-color-subtitle w-fit"> ${(flight.category && flight.category <= 17) ? flightCategory[flight.category] : flightCategory[0]} </p>\n`;
 
     return node;
 }
@@ -53,11 +53,11 @@ function addFlightsToList(flightsArray: IFlight[]): void {
 
 }
 
-const listObserver = {
-    next: (flightDataArray: IFlight[] | ofError) => {
+const listObserver: IObserver = {
+    next: (flightDataArray: IFlight[] | IofError) => {
         addFlightsToList(flightDataArray as IFlight[]);
     },
-    error: (error: ofError) => {
+    error: (error: IofError) => {
         return error;
     },
 };

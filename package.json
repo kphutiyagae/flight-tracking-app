@@ -13,7 +13,9 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run lint"
+    "posttest": "npm run lint",
+    "tailwind": "npx tailwindcss -i ./src/stylesheets/styles.css -o ./dist/stylesheets/styles.css",
+    "tailwind-watch": "npx tailwindcss -i ./src/stylesheets/styles.css -o ./dist/stylesheets/styles.css --watch"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.1",

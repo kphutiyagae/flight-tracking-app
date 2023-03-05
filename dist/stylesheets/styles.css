@@ -581,6 +581,16 @@ video {
   width: 100%;
 }
 
+.w-min {
+  width: -moz-min-content;
+  width: min-content;
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -705,8 +715,12 @@ html {
   font-family: "Questrial", sans-serif;
 }
 
+/* */
+
 #container__list-component {
   overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 #container__list-component::-webkit-scrollbar {

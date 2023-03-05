@@ -124,7 +124,7 @@ const isRequestInCacheTest: boolean = await isRequestInCache(
     `${baseUrl}/states/all?extended=1`
 )
 
-const cachedOrRequestedFlightData$ = iif(
+const cachedOrRequestedFlightData$: Observable<IFlight[] | IofError> = iif(
     () => isRequestInCacheTest,
     cachedFlightData$,
     requestedFlightData$

@@ -2,8 +2,8 @@ import L from 'leaflet';
 import { IFlight, IObserver, IofError } from '../types/interfaces';
 
 const map: L.Map = L.map('map', {
-    center: new L.LatLng(51.505, -0.09),
-    zoom: 1,
+    center: new L.LatLng(-26.2041, 28.0473),
+    zoom: 4,
     attributionControl: false,
     dragging: false,
 });
